@@ -17,7 +17,7 @@ export const IncomeExpenses = () => {
   ).toFixed(2);
 
   return (
-    <div className="py-4 px-12 flex justify-between shadow-md text-lg border">
+    <div className="py-4 px-12 flex justify-between shadow-md text-lg">
       <div>
         <h4>Income</h4>
         <p className="text-green-500 font-semibold">{income}</p>

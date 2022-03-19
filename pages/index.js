@@ -12,8 +12,8 @@ export default function Home() {
       <Head>
         <title>Expense Tracker</title>
       </Head>
-      <main className="min-h-screen flex items-center justify-center my-12">
-        <div className="w-full space-y-6 max-w-sm">
+      <main className="min-h-screen flex items-center justify-center py-12 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 select-none">
+        <div className="w-full space-y-6 max-w-md bg-white p-4 rounded-md min-h-screen shadow-md">
           <Header title="Expense Tracker" />
           <div>
             <Balance />

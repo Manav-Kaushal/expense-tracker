@@ -7,7 +7,7 @@ import { TransactionList } from "../components/TransactionList";
 export default function Home() {
   return (
     <main className="min-h-screen flex items-center justify-center">
-      <div className="w-full space-y-4 max-w-sm">
+      <div className="w-full space-y-6 max-w-sm">
         <Header title="Expense Tracker" />
         <div>
           <Balance />

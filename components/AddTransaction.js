@@ -39,6 +39,7 @@ export const AddTransaction = () => {
                 Amount&nbsp;<span>(negative - expense, positive - income)</span>
               </label>
               <Field
+                type="number"
                 id="amount"
                 name="amount"
                 placeholder="Enter amount here..."

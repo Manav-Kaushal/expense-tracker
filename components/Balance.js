@@ -14,8 +14,12 @@ export const Balance = () => {
   return (
     <>
       <h4 className="text-lg">Your Balance</h4>
-      <h1 className="text-2xl font-semibold">
-        {sign}₹{numberWithCommas(Math.abs(total))} 
+      <h1
+        className={`text-2xl font-semibold ${
+          total < 0 ? "text-red-500" : "text-green-500"
+        }`}
+      >
+        {sign}₹{numberWithCommas(Math.abs(total))}
       </h1>
     </>
   );

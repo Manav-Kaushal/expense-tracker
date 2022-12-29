@@ -18,17 +18,17 @@ export const IncomeExpenses = () => {
   ).toFixed(2);
 
   return (
-    <div className="py-4 px-12 flex justify-between shadow-md text-lg">
+    <div className="flex justify-between px-12 py-4 text-lg border rounded-md shadow-md">
       <div>
         <h4>Income</h4>
-        <p className="text-green-500 font-semibold">
+        <p className="font-semibold text-green-500">
           ₹{numberWithCommas(income)}
         </p>
       </div>
-      <div className="h-15 border-r border-gray-200" />
+      <div className="border-r border-gray-200 h-15" />
       <div>
         <h4>Expense</h4>
-        <p className="text-red-500 font-semibold">
+        <p className="font-semibold text-red-500">
           ₹{numberWithCommas(expense)}
         </p>
       </div>

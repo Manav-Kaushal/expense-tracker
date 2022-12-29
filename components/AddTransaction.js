@@ -20,17 +20,25 @@ export const AddTransaction = () => {
   };
 
   return (
-    <div className="space-y-2">
-      <h4 className="text-lg border-b border-gray-400">Add New Transaction</h4>
+    <div className="space-y-3">
+      <h4 className="text-lg font-semibold border-b border-gray-400">
+        New Transaction
+      </h4>
       <div>
         <Formik
           initialValues={{
             text: "",
             amount: "",
           }}
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={(values, { resetForm }) => {
+            handleSubmit(values);
+            resetForm();
+          }}
         >
-          <Form className="space-y-2 shadow-md p-4 text-lg">
+          <Form
+            className="w-full p-4 space-y-3 text-lg border rounded-md shadow-md"
+            autoComplete="off"
+          >
             <div>
               <label
                 htmlFor="text"
@@ -41,9 +49,8 @@ export const AddTransaction = () => {
               <Field
                 id="text"
                 name="text"
-                autoComplete="off"
                 placeholder="Text"
-                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <div>
@@ -58,16 +65,17 @@ export const AddTransaction = () => {
                 id="amount"
                 name="amount"
                 placeholder="Amount (- expense, + income)"
-                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
-            <button
-              type="submit"
-              className="w-full inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {loading ? "Loading..." : "Add Transaction"}
-            </button>
+            <div>
+              <button
+                type="submit"
+                className="flex items-center justify-center px-3 py-2 ml-auto text-sm font-medium leading-4 text-white transition-all duration-200 ease-in-out rounded-md shadow-sm max-w-fit bg-black/80 hover:bg-black focus:outline-none"
+              >
+                {loading ? "Loading..." : "Add Transaction"}
+              </button>
+            </div>
           </Form>
         </Formik>
       </div>

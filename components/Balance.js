@@ -13,7 +13,9 @@ export const Balance = () => {
 
   return (
     <>
-      <h4 className="text-lg">Your Balance</h4>
+      <h4 className="text-lg font-semibold border-b border-gray-400">
+        Balance
+      </h4>
       <h1
         className={`text-2xl font-semibold ${
           total < 0 ? "text-red-500" : "text-green-500"

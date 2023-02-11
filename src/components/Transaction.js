@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { XCircleIcon } from "@heroicons/react/solid";
+import { XCircleIcon } from "@heroicons/react/24/solid";
 import { GlobalContext } from "../context/GlobalState";
 import dayjs from "dayjs";
 import { numberWithCommas } from "../utils/format";

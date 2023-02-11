@@ -1,6 +1,10 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
+import { page } from "../utils/config";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
+import axiosClient from "@utils/axiosClient";
 
 // Initial State
 const initialState = {
@@ -14,17 +18,13 @@ export const GlobalContext = createContext(initialState);
 
 // Provider component
 export const GlobalProvider = ({ children }) => {
+  const router = useRouter();
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
   async function getTransactions() {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/transactions", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
+      const res = await axiosClient.get(`/v1/transactions`);
       dispatch({
         type: "GET_TRANSACTIONS",
         payload: res.data.data,
@@ -39,8 +39,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/transactions/${id}`);
-
+      await axiosClient.delete(`/v1/transactions/${id}`);
       dispatch({ type: "DELETE_TRANSACTION", payload: id });
     } catch (err) {
       dispatch({
@@ -51,23 +50,35 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function addTransaction(transaction) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/v1/transactions/",
-        transaction,
-        config
-      );
+      const res = await axiosClient.post(`/v1/transactions`, {
+        ...transaction,
+      });
       dispatch({ type: "ADD_TRANSACTION", payload: res.data.data });
     } catch (err) {
+      toast.error(err.response.data.error[0]);
       dispatch({
         type: "TRANSACTION_ERROR",
         payload: err.error,
       });
+    }
+  }
+
+  async function registerUser(values, setSubmitting) {
+    setSubmitting(true);
+    try {
+      const response = await axios.post(`${page.apiBaseUrl}/auth/register`, {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      });
+      dispatch({ type: "REGISTER_USER", payload: response.data.token });
+      toast.success(response.data.message);
+      setTimeout(() => router.push("/login"), 500);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -80,6 +91,8 @@ export const GlobalProvider = ({ children }) => {
         getTransactions,
         error: state.error,
         loading: state.loading,
+        user: state.user,
+        registerUser,
       }}
     >
       {children}

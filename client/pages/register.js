@@ -1,14 +1,11 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
-import Button from "../src/components/Button";
-import Card from "../src/components/Card";
-import InputField from "../src/components/InputField";
-import toast from "react-hot-toast";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { Field, Form, Formik } from "formik";
-import { page } from "../src/utils/config";
-import { GlobalContext } from "../src/context/GlobalState";
 import Logo from "@components/Logo";
+import { GlobalContext } from "@context/GlobalState";
+import InputField from "@components/InputField";
+import Card from "@components/Card";
+import Button from "@components/Button";
 
 const Register = () => {
   const { registerUser } = useContext(GlobalContext);
